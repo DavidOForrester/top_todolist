@@ -1,4 +1,5 @@
-import _, { constant } from "lodash";
+import _ from "lodash";
 import './style.css';
+import printMe from './print.js';
 
-console.log("testing")
+printMe()
