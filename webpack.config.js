@@ -5,7 +5,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
   mode: 'development',
   entry: {
      index: './src/index.js',
-     print: './src/print.js',
+     dom: './src/dom.js',
+     todo: './src/todo.js',
    },
   plugins: [
     new HtmlWebpackPlugin({

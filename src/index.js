@@ -1,5 +1,6 @@
 import _ from "lodash";
 import './style.css';
-import printMe from './print.js';
+import dom from './dom.js';
+import todo from './todo.js';
 
-printMe()
+dom()
