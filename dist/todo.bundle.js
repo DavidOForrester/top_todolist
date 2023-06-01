@@ -15,7 +15,7 @@
   \*********************/
 /***/ (() => {
 
-eval("// Creating a new todo\n\n\n// Completing a todo\n\n\n// Updating a todo\n\n//# sourceURL=webpack://webpack-demo/./src/todo.js?");
+eval("// Creating a new todo\nconst todoListFactory = (title, description, dueDate, priority, complete) => {\n  \n  return { title, description, dueDate, priority, complete }\n}\n\n//# sourceURL=webpack://webpack-demo/./src/todo.js?");
 
 /***/ })
 
