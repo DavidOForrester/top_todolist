@@ -147,7 +147,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ \"./node_modules/lodash/lodash.js\");\n/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n/* harmony import */ var _dom_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./dom.js */ \"./src/dom.js\");\n/* harmony import */ var _todo_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./todo.js */ \"./src/todo.js\");\n/* harmony import */ var _todo_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_todo_js__WEBPACK_IMPORTED_MODULE_3__);\n\n\n\n\n\n\nconst todoListFactory = (title, description, dueDate, priority, complete) => {\n  \n  return { title, description, dueDate, priority, complete }\n}\n\n\nconst itemOne = todoListFactory(\n  \"task 1\",\n  \"description of the task\",\n  \"01/01/2013\",\n  \"High\",\n  false\n);\n\nconsole.log(itemOne);\n\n\n//# sourceURL=webpack://webpack-demo/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ \"./node_modules/lodash/lodash.js\");\n/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n/* harmony import */ var _dom_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./dom.js */ \"./src/dom.js\");\n/* harmony import */ var _todo_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./todo.js */ \"./src/todo.js\");\n\n\n\n\n\nconst todoListItems = [];\n\nfor (let i = 0; i < 3; i++) {\n  const item = new _todo_js__WEBPACK_IMPORTED_MODULE_3__[\"default\"](\n    \"task \" + i,\n    \"description of the task\",\n    \"01/01/2013\",\n    \"High\"\n  );\n\n  todoListItems.push(item);\n}\n\nconsole.log(todoListItems);\n\ntodoListItems[0].completeTask(0, todoListItems);\n\nconsole.log(todoListItems);\n\n\n//# sourceURL=webpack://webpack-demo/./src/index.js?");
 
 /***/ }),
 
@@ -155,9 +155,10 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var loda
 /*!*********************!*\
   !*** ./src/todo.js ***!
   \*********************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("// Creating a new todo\nconst todoListFactory = (title, description, dueDate, priority, complete) => {\n  \n  return { title, description, dueDate, priority, complete }\n}\n\n//# sourceURL=webpack://webpack-demo/./src/todo.js?");
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ todoList)\n/* harmony export */ });\n// Creating a new todo\nclass todoList {\n  constructor(title, description, dueDate, priority) {\n    this.title = title;\n    this.description = description;\n    this.dueDate = dueDate;\n    this.priority = priority;\n    this.project = \"default\";\n    this.complete = false;\n  }\n\n  completeTask(index, todoListItems) {\n    todoListItems[index].complete = true;\n  }\n}\n\n\n//# sourceURL=webpack://webpack-demo/./src/todo.js?");
 
 /***/ })
 

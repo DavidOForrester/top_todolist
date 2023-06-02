@@ -1,21 +1,23 @@
 import _ from "lodash";
 import "./style.css";
 import dom from "./dom.js";
-import todo from "./todo.js";
+import todoList from "./todo.js";
 
+const todoListItems = [];
 
-const todoListFactory = (title, description, dueDate, priority, complete) => {
-  
-  return { title, description, dueDate, priority, complete }
+for (let i = 0; i < 3; i++) {
+  const item = new todoList(
+    "task " + i,
+    "description of the task",
+    "01/01/2013",
+    "High"
+  );
+
+  todoListItems.push(item);
 }
 
+console.log(todoListItems);
 
-const itemOne = todoListFactory(
-  "task 1",
-  "description of the task",
-  "01/01/2013",
-  "High",
-  false
-);
+todoListItems[0].completeTask(0, todoListItems);
 
-console.log(itemOne);
+console.log(todoListItems);
