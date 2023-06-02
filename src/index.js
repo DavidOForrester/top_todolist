@@ -1,6 +1,6 @@
 import _ from "lodash";
 import "./style.css";
-import dom from "./dom.js";
+import * as dom from "./dom.js";
 import todoList from "./todo.js";
 
 const todoListItems = [];
@@ -16,8 +16,8 @@ for (let i = 0; i < 3; i++) {
   todoListItems.push(item);
 }
 
-console.log(todoListItems);
+todoListItems[1].completeTask(1, todoListItems);
 
-todoListItems[0].completeTask(0, todoListItems);
+dom.pageLoad(todoListItems);
 
 console.log(todoListItems);

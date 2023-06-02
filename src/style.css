@@ -2,4 +2,30 @@ body {
   background-color: black;
   color: white;
   font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#content {
+  width: 60%;
+  background-color: green;
+}
+
+header {
+  height: 100px;
+  width: 100%;
+  background-color: blue;
+}
+
+main {
+  height: auto;
+  width: 100%;
+  background-color: orange;
+}
+
+footer {
+  height: 50px;
+  width: 100%;
+  background-color: grey;
 }

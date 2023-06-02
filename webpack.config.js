@@ -8,6 +8,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
      dom: './src/dom.js',
      todo: './src/todo.js',
    },
+  devtool: 'inline-source-map',
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Output Management',
