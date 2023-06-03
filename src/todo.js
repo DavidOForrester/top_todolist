@@ -1,5 +1,5 @@
 // Creating a new todo
-export default class todoList {
+export class todoList {
   constructor(title, description, dueDate, priority, project) {
     this.title = title;
     this.description = description;
@@ -15,5 +15,11 @@ export default class todoList {
 
   uncompleteTask(index, todoListItems) {
     todoListItems[index].complete = false;
+  }
+}
+
+export class project {
+  constructor(project) {
+    this.project = project
   }
 }

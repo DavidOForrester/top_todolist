@@ -1,12 +1,16 @@
 import _ from "lodash";
 import "./style.css";
 import * as dom from "./dom.js";
-import todoList from "./todo.js";
+import * as todo from "./todo.js";
 
 const todoListItems = [];
+const projects = [];
+
+const defaultProject = new todo.project("Default");
+projects.push(defaultProject);
 
 for (let i = 0; i < 3; i++) {
-  const item = new todoList(
+  const item = new todo.todoList(
     "task " + i,
     "description of the task",
     "01/01/2013",
@@ -17,5 +21,4 @@ for (let i = 0; i < 3; i++) {
   todoListItems.push(item);
 }
 
-dom.pageLoad(todoListItems);
-
+dom.pageLoad(todoListItems, projects);

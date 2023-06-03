@@ -1,7 +1,7 @@
-import todoList from "./todo";
+import * as todo from "./todo";
 
 // Initial load of the page
-export function pageLoad(todoListItems) {
+export function pageLoad(todoListItems, projects) {
   const content = document.createElement("div");
   content.id = "content";
   document.body.appendChild(content);
@@ -24,8 +24,18 @@ export function pageLoad(todoListItems) {
   headerButton.innerText = "Add Task";
   header.appendChild(headerButton);
   headerButton.addEventListener("click", () => {
-    addTask(todoListItems);
+    addTask(todoListItems, projects);
   });
+
+  const project = document.createElement("select");
+  project.name = "project";
+  header.appendChild(project);
+  for (const projectItem of projects) {
+    const optionProject = document.createElement("option");
+    optionProject.value = projectItem.project;
+    optionProject.innerText = projectItem.project;
+    project.appendChild(optionProject);
+  }
 
   // Main element
   const todoItems = document.createElement("div");
@@ -44,7 +54,7 @@ export function pageLoad(todoListItems) {
   completeList.id = "complete-list";
   completeItems.appendChild(completeList);
 
-  buildTodoList(todoListItems, todoList, completeList);
+  buildTodoList(todoListItems, todoList, completeList, projects);
 
   // Footer element
   const footerText = document.createElement("div");
@@ -52,7 +62,7 @@ export function pageLoad(todoListItems) {
   footer.appendChild(footerText);
 }
 
-export function addTask(todoListItems) {
+export function addTask(todoListItems, projects) {
   const addTaskFrom = document.createElement("div");
   addTaskFrom.id = "add-task-form";
   document.body.appendChild(addTaskFrom);
@@ -93,11 +103,16 @@ export function addTask(todoListItems) {
   optionHigh.innerText = "High";
   priority.appendChild(optionHigh);
 
-  const project = document.createElement("input");
-  project.type = "textbox";
+  const project = document.createElement("select");
   project.name = "project";
-  project.defaultValue = "default";
   form.appendChild(project);
+
+  for (const projectItem of projects) {
+    const optionProject = document.createElement("option");
+    optionProject.value = projectItem.project;
+    optionProject.innerText = projectItem.project;
+    project.appendChild(optionProject);
+  }
 
   const submit = document.createElement("input");
   submit.type = "submit";
@@ -113,17 +128,23 @@ export function addTask(todoListItems) {
     const priority = formData.get("priority");
     const project = formData.get("project");
 
-    const item = new todoList(title, description, dueDate, priority, project);
+    const item = new todo.todoList(
+      title,
+      description,
+      dueDate,
+      priority,
+      project
+    );
 
     todoListItems.push(item);
 
     document.body.innerHTML = "";
 
-    pageLoad(todoListItems);
+    pageLoad(todoListItems, projects);
   });
 }
 
-export function buildTodoList(todoListItems, todoList, completeList) {
+export function buildTodoList(todoListItems, todoList, completeList, projects) {
   const createListItem = (item, i) => {
     const listItem = document.createElement("li");
 
@@ -135,11 +156,11 @@ export function buildTodoList(todoListItems, todoList, completeList) {
       if (todoListItems[i].complete == false) {
         todoListItems[i].completeTask(i, todoListItems);
         document.body.innerHTML = "";
-        pageLoad(todoListItems);
+        pageLoad(todoListItems, projects);
       } else {
         todoListItems[i].uncompleteTask(i, todoListItems);
         document.body.innerHTML = "";
-        pageLoad(todoListItems);
+        pageLoad(todoListItems, projects);
       }
     });
 
