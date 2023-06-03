@@ -12,4 +12,8 @@ export default class todoList {
   completeTask(index, todoListItems) {
     todoListItems[index].complete = true;
   }
+
+  uncompleteTask(index, todoListItems) {
+    todoListItems[index].complete = false;
+  }
 }

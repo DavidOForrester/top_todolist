@@ -37,7 +37,7 @@ export function pageLoad(todoListItems) {
   todoItems.appendChild(todoList);
 
   const completeItems = document.createElement("div");
-  completeItems.innerText = "Items Complete";
+  completeItems.innerText = "Items Completed";
   main.appendChild(completeItems);
 
   const completeList = document.createElement("ul");
@@ -132,9 +132,15 @@ export function buildTodoList(todoListItems, todoList, completeList) {
     complete.checked = item.complete;
     listItem.appendChild(complete);
     complete.addEventListener("change", function () {
-      todoListItems[i].completeTask(i, todoListItems);
-      document.body.innerHTML = ""
-      pageLoad(todoListItems);
+      if (todoListItems[i].complete == false) {
+        todoListItems[i].completeTask(i, todoListItems);
+        document.body.innerHTML = "";
+        pageLoad(todoListItems);
+      } else {
+        todoListItems[i].uncompleteTask(i, todoListItems);
+        document.body.innerHTML = "";
+        pageLoad(todoListItems);
+      }
     });
 
     const title = document.createElement("div");
