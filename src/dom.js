@@ -28,36 +28,23 @@ export function pageLoad(todoListItems) {
   });
 
   // Main element
-  const list = document.createElement("ul");
-  list.id = "todo-list";
-  main.appendChild(list);
+  const todoItems = document.createElement("div");
+  todoItems.innerText = "Items Todo";
+  main.appendChild(todoItems);
 
-  for (const item of todoListItems) {
-    const listItem = document.createElement("li");
-    list.appendChild(listItem);
+  const todoList = document.createElement("ul");
+  todoList.id = "todo-list";
+  todoItems.appendChild(todoList);
 
-    const form = document.createElement("form");
-    listItem.appendChild(form);
+  const completeItems = document.createElement("div");
+  completeItems.innerText = "Items Complete";
+  main.appendChild(completeItems);
 
-    const complete = document.createElement("input");
-    complete.type = "checkbox";
-    complete.checked = item.complete;
-    form.appendChild(complete);
+  const completeList = document.createElement("ul");
+  completeList.id = "complete-list";
+  completeItems.appendChild(completeList);
 
-    const title = document.createElement("input");
-    title.type = "textbox";
-    title.value = item.title;
-    form.appendChild(title);
-
-    const dueDate = document.createElement("input");
-    dueDate.type = "date";
-    dueDate.value = item.dueDate;
-    form.appendChild(dueDate);
-
-    const submit = document.createElement("input");
-    submit.type = "submit";
-    form.appendChild(submit);
-  }
+  buildTodoList(todoListItems, todoList, completeList);
 
   // Footer element
   const footerText = document.createElement("div");
@@ -134,4 +121,42 @@ export function addTask(todoListItems) {
 
     pageLoad(todoListItems);
   });
+}
+
+export function buildTodoList(todoListItems, todoList, completeList) {
+  const createListItem = (item, i) => {
+    const listItem = document.createElement("li");
+
+    const complete = document.createElement("input");
+    complete.type = "checkbox";
+    complete.checked = item.complete;
+    listItem.appendChild(complete);
+    complete.addEventListener("change", function () {
+      todoListItems[i].completeTask(i, todoListItems);
+      document.body.innerHTML = ""
+      pageLoad(todoListItems);
+    });
+
+    const title = document.createElement("div");
+    title.innerText = item.title;
+    listItem.appendChild(title);
+
+    const dueDate = document.createElement("div");
+    dueDate.innerText = item.dueDate;
+    listItem.appendChild(dueDate);
+
+    return listItem;
+  };
+
+  let i = 0;
+  for (const item of todoListItems) {
+    const listItem = createListItem(item, i);
+
+    if (item.complete) {
+      completeList.appendChild(listItem);
+    } else {
+      todoList.appendChild(listItem);
+    }
+    i = i + 1;
+  }
 }

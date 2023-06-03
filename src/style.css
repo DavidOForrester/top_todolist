@@ -30,3 +30,9 @@ footer {
   width: 100%;
   background-color: grey;
 }
+
+li {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
