@@ -188,6 +188,10 @@ export function buildTodoList(todoListItems, todoList, completeList, projects) {
     dueDate.innerText = item.dueDate;
     listItem.appendChild(dueDate);
 
+    const project = document.createElement("div");
+    project.innerText = item.project;
+    listItem.appendChild(project);
+
     return listItem;
   };
 
