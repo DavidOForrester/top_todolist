@@ -37,6 +37,19 @@ export function pageLoad(todoListItems, projects) {
     project.appendChild(optionProject);
   }
 
+  const addProject = document.createElement("input");
+  addProject.placeholder = "New Project";
+  header.appendChild(addProject);
+  addProject.addEventListener("keydown", (event) => {
+    const key = event.key;
+    if (key == "Enter") {
+      const newProject = new todo.project(addProject.value);
+      projects.push(newProject);
+      document.body.innerHTML = "";
+      pageLoad(todoListItems, projects);
+    }
+  });
+
   // Main element
   const todoItems = document.createElement("div");
   todoItems.innerText = "Items Todo";
@@ -108,10 +121,13 @@ export function addTask(todoListItems, projects) {
   form.appendChild(project);
 
   for (const projectItem of projects) {
-    const optionProject = document.createElement("option");
-    optionProject.value = projectItem.project;
-    optionProject.innerText = projectItem.project;
-    project.appendChild(optionProject);
+    if (projectItem.project == "All") {
+    } else {
+      const optionProject = document.createElement("option");
+      optionProject.value = projectItem.project;
+      optionProject.innerText = projectItem.project;
+      project.appendChild(optionProject);
+    }
   }
 
   const submit = document.createElement("input");
