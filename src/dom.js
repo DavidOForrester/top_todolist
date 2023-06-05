@@ -192,6 +192,10 @@ export function buildTodoList(todoListItems, todoList, completeList, projects) {
     project.innerText = item.project;
     listItem.appendChild(project);
 
+    listItem.addEventListener("click", () => {
+      editTask(todoListItems, i, projects);
+    });
+
     return listItem;
   };
 
@@ -206,4 +210,87 @@ export function buildTodoList(todoListItems, todoList, completeList, projects) {
     }
     i = i + 1;
   }
+}
+
+function editTask(todoListItems, i, projects) {
+  const addTaskFrom = document.createElement("div");
+  addTaskFrom.id = "edit-task-form";
+  document.body.appendChild(addTaskFrom);
+
+  const form = document.createElement("form");
+  addTaskFrom.appendChild(form);
+
+  const title = document.createElement("input");
+  title.type = "textbox";
+  title.name = "title";
+  title.value = todoListItems[i].title;
+  title.placeholder = "title";
+  form.appendChild(title);
+
+  const description = document.createElement("input");
+  description.type = "textbox";
+  description.name = "description";
+  description.value = todoListItems[i].description;
+  description.placeholder = "description";
+  form.appendChild(description);
+
+  const dueDate = document.createElement("input");
+  dueDate.type = "Date";
+  dueDate.name = "dueDate";
+  dueDate.value = todoListItems[i].dueDate;
+  form.appendChild(dueDate);
+
+  const priority = document.createElement("select");
+  priority.name = "priority";
+  priority.value = todoListItems[i].priority;
+  form.appendChild(priority);
+  const optionLow = document.createElement("option");
+  optionLow.value = "Low";
+  optionLow.innerText = "Low";
+  priority.appendChild(optionLow);
+  const optionLMedium = document.createElement("option");
+  optionLMedium.value = "Medium";
+  optionLMedium.innerText = "Medium";
+  priority.appendChild(optionLMedium);
+  const optionHigh = document.createElement("option");
+  optionHigh.value = "High";
+  optionHigh.innerText = "High";
+  priority.appendChild(optionHigh);
+
+  const project = document.createElement("select");
+  project.name = "project";
+  project.value = todoListItems[i].project;
+  form.appendChild(project);
+
+  for (const projectItem of projects) {
+    if (projectItem.project == "All") {
+    } else {
+      const optionProject = document.createElement("option");
+      optionProject.value = projectItem.project;
+      optionProject.innerText = projectItem.project;
+      project.appendChild(optionProject);
+    }
+  }
+
+  const submit = document.createElement("input");
+  submit.type = "submit";
+  form.appendChild(submit);
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const formData = new FormData(form);
+    const title = formData.get("title");
+    const description = formData.get("description");
+    const dueDate = formData.get("dueDate");
+    const priority = formData.get("priority");
+    const project = formData.get("project");
+
+    // TODO: work out how to update the array.
+    todoListItems.set(i, title, description, dueDate, priority, project);
+
+    document.body.innerHTML = "";
+
+    pageLoad(todoListItems, projects);
+  });
 }
