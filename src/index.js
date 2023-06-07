@@ -17,7 +17,7 @@ for (let i = 0; i < 3; i++) {
     "task " + i,
     "description of the task",
     "01/01/2013",
-    "High",
+    "Low",
     "default"
   );
 

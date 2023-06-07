@@ -16,10 +16,26 @@ export class todoList {
   uncompleteTask(index, todoListItems) {
     todoListItems[index].complete = false;
   }
+
+  updateTask(
+    index,
+    todoListItems,
+    title,
+    description,
+    dueDate,
+    priority,
+    project
+  ) {
+    todoListItems[index].title = title;
+    todoListItems[index].description = description;
+    todoListItems[index].dueDate = dueDate;
+    todoListItems[index].priority = priority;
+    todoListItems[index].project = project;
+  }
 }
 
 export class project {
   constructor(project) {
-    this.project = project
+    this.project = project;
   }
 }

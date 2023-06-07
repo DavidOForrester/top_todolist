@@ -241,8 +241,8 @@ function editTask(todoListItems, i, projects) {
   form.appendChild(dueDate);
 
   const priority = document.createElement("select");
+  priority.id = "priority"
   priority.name = "priority";
-  priority.value = todoListItems[i].priority;
   form.appendChild(priority);
   const optionLow = document.createElement("option");
   optionLow.value = "Low";
@@ -256,10 +256,11 @@ function editTask(todoListItems, i, projects) {
   optionHigh.value = "High";
   optionHigh.innerText = "High";
   priority.appendChild(optionHigh);
+  document.getElementById("priority").value = todoListItems[i].priority;
 
   const project = document.createElement("select");
+  project.id = "project"
   project.name = "project";
-  project.value = todoListItems[i].project;
   form.appendChild(project);
 
   for (const projectItem of projects) {
@@ -271,6 +272,8 @@ function editTask(todoListItems, i, projects) {
       project.appendChild(optionProject);
     }
   }
+  document.getElementById("project").value = todoListItems[i].project;
+
 
   const submit = document.createElement("input");
   submit.type = "submit";
@@ -286,8 +289,7 @@ function editTask(todoListItems, i, projects) {
     const priority = formData.get("priority");
     const project = formData.get("project");
 
-    // TODO: work out how to update the array.
-    todoListItems.set(i, title, description, dueDate, priority, project);
+    todoListItems[i].updateTask(i, todoListItems, title, description, dueDate, priority, project)
 
     document.body.innerHTML = "";
 
