@@ -1,6 +1,5 @@
 import * as todo from "./todo";
 
-// Initial load of the page
 export function pageLoad(todoListItems, projects) {
   const content = document.createElement("div");
   content.id = "content";
@@ -158,6 +157,19 @@ export function addTask(todoListItems, projects) {
 
     pageLoad(todoListItems, projects);
   });
+
+  const cancel = document.createElement("input");
+  cancel.type = "button";
+  cancel.value = "Cancel"
+  form.appendChild(cancel);
+
+  cancel.addEventListener("click", function (event) {
+    event.preventDefault();
+
+    document.body.innerHTML = "";
+
+    pageLoad(todoListItems, projects);
+  });
 }
 
 export function buildTodoList(todoListItems, todoList, completeList, projects) {
@@ -241,7 +253,7 @@ function editTask(todoListItems, i, projects) {
   form.appendChild(dueDate);
 
   const priority = document.createElement("select");
-  priority.id = "priority"
+  priority.id = "priority";
   priority.name = "priority";
   form.appendChild(priority);
   const optionLow = document.createElement("option");
@@ -259,7 +271,7 @@ function editTask(todoListItems, i, projects) {
   document.getElementById("priority").value = todoListItems[i].priority;
 
   const project = document.createElement("select");
-  project.id = "project"
+  project.id = "project";
   project.name = "project";
   form.appendChild(project);
 
@@ -273,7 +285,6 @@ function editTask(todoListItems, i, projects) {
     }
   }
   document.getElementById("project").value = todoListItems[i].project;
-
 
   const submit = document.createElement("input");
   submit.type = "submit";
@@ -289,7 +300,28 @@ function editTask(todoListItems, i, projects) {
     const priority = formData.get("priority");
     const project = formData.get("project");
 
-    todoListItems[i].updateTask(i, todoListItems, title, description, dueDate, priority, project)
+    todoListItems[i].updateTask(
+      i,
+      todoListItems,
+      title,
+      description,
+      dueDate,
+      priority,
+      project
+    );
+
+    document.body.innerHTML = "";
+
+    pageLoad(todoListItems, projects);
+  });
+
+  const cancel = document.createElement("input");
+  cancel.type = "button";
+  cancel.value = "Cancel"
+  form.appendChild(cancel);
+
+  cancel.addEventListener("click", function (event) {
+    event.preventDefault();
 
     document.body.innerHTML = "";
 
