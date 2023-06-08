@@ -32,6 +32,10 @@ export class todoList {
     todoListItems[index].priority = priority;
     todoListItems[index].project = project;
   }
+
+  deleteTask(index, todoListItems) {
+    todoListItems.splice(index, 1);
+  }
 }
 
 export class project {

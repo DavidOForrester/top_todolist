@@ -160,7 +160,7 @@ export function addTask(todoListItems, projects) {
 
   const cancel = document.createElement("input");
   cancel.type = "button";
-  cancel.value = "Cancel"
+  cancel.value = "Cancel";
   form.appendChild(cancel);
 
   cancel.addEventListener("click", function (event) {
@@ -317,11 +317,26 @@ function editTask(todoListItems, i, projects) {
 
   const cancel = document.createElement("input");
   cancel.type = "button";
-  cancel.value = "Cancel"
+  cancel.value = "Cancel";
   form.appendChild(cancel);
 
   cancel.addEventListener("click", function (event) {
     event.preventDefault();
+
+    document.body.innerHTML = "";
+
+    pageLoad(todoListItems, projects);
+  });
+
+  const deleteButton = document.createElement("input");
+  deleteButton.type = "button";
+  deleteButton.value = "Delete";
+  form.appendChild(deleteButton);
+
+  deleteButton.addEventListener("click", function (event) {
+    event.preventDefault();
+
+    todoListItems[i].deleteTask(i, todoListItems);
 
     document.body.innerHTML = "";
 
