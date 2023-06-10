@@ -44,17 +44,9 @@ export function pageLoad(todoListItems, projects) {
     if (key == "Enter") {
       const newProject = new todo.project(addProject.value);
       projects.push(newProject);
-      document.body.innerHTML = "";
-      pageLoad(todoListItems, projects);
+      todo.saveLocal(todoListItems, projects);
+      resetPage(todoListItems, projects);
     }
-  });
-
-  const saveLocalButton = document.createElement("button");
-  saveLocalButton.id = "save-local-button";
-  saveLocalButton.innerText = "Save Local";
-  header.appendChild(saveLocalButton);
-  saveLocalButton.addEventListener("click", () => {
-    todo.saveLocal(todoListItems, projects)
   });
 
   // Main element
@@ -160,10 +152,8 @@ export function addTask(todoListItems, projects) {
     );
 
     todoListItems.push(item);
-
-    document.body.innerHTML = "";
-
-    pageLoad(todoListItems, projects);
+    todo.saveLocal(todoListItems, projects);
+    resetPage(todoListItems, projects);
   });
 
   const cancel = document.createElement("input");
@@ -174,9 +164,7 @@ export function addTask(todoListItems, projects) {
   cancel.addEventListener("click", function (event) {
     event.preventDefault();
 
-    document.body.innerHTML = "";
-
-    pageLoad(todoListItems, projects);
+    resetPage(todoListItems, projects);
   });
 }
 
@@ -191,12 +179,12 @@ export function buildTodoList(todoListItems, todoList, completeList, projects) {
     complete.addEventListener("change", function () {
       if (todoListItems[i].complete == false) {
         todoListItems[i].completeTask(i, todoListItems);
-        document.body.innerHTML = "";
-        pageLoad(todoListItems, projects);
+        todo.saveLocal(todoListItems, projects);
+        resetPage(todoListItems, projects);
       } else {
         todoListItems[i].uncompleteTask(i, todoListItems);
-        document.body.innerHTML = "";
-        pageLoad(todoListItems, projects);
+        todo.saveLocal(todoListItems, projects);
+        resetPage(todoListItems, projects);
       }
     });
 
@@ -215,7 +203,7 @@ export function buildTodoList(todoListItems, todoList, completeList, projects) {
     listItem.addEventListener("click", () => {
       editTask(todoListItems, i, projects);
     });
- 
+
     return listItem;
   };
 
@@ -296,7 +284,7 @@ function editTask(todoListItems, i, projects) {
 
   const submit = document.createElement("input");
   submit.type = "submit";
-  submit.value = "Update"
+  submit.value = "Update";
   form.appendChild(submit);
 
   form.addEventListener("submit", function (event) {
@@ -318,10 +306,8 @@ function editTask(todoListItems, i, projects) {
       priority,
       project
     );
-
-    document.body.innerHTML = "";
-
-    pageLoad(todoListItems, projects);
+    todo.saveLocal(todoListItems, projects);
+    resetPage(todoListItems, projects);
   });
 
   const cancel = document.createElement("input");
@@ -332,9 +318,7 @@ function editTask(todoListItems, i, projects) {
   cancel.addEventListener("click", function (event) {
     event.preventDefault();
 
-    document.body.innerHTML = "";
-
-    pageLoad(todoListItems, projects);
+    resetPage(todoListItems, projects);
   });
 
   const deleteButton = document.createElement("input");
@@ -346,9 +330,13 @@ function editTask(todoListItems, i, projects) {
     event.preventDefault();
 
     todoListItems[i].deleteTask(i, todoListItems);
-
-    document.body.innerHTML = "";
-
-    pageLoad(todoListItems, projects);
+    todo.saveLocal(todoListItems, projects);
+    resetPage(todoListItems, projects);
   });
+}
+
+function resetPage(todoListItems, projects) {
+  document.body.innerHTML = "";
+
+  pageLoad(todoListItems, projects);
 }

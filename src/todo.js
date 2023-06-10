@@ -46,6 +46,7 @@ export class project {
 
 export function saveLocal(todoListItems, projects) {
   if (storageAvailable("localStorage")) {
+    localStorage.clear();
     populateStorage(todoListItems, projects);
   }
 }
