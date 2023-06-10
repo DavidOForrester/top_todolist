@@ -49,6 +49,14 @@ export function pageLoad(todoListItems, projects) {
     }
   });
 
+  const saveLocalButton = document.createElement("button");
+  saveLocalButton.id = "save-local-button";
+  saveLocalButton.innerText = "Save Local";
+  header.appendChild(saveLocalButton);
+  saveLocalButton.addEventListener("click", () => {
+    todo.saveLocal(todoListItems, projects)
+  });
+
   // Main element
   const todoItems = document.createElement("div");
   todoItems.innerText = "Items Todo";
@@ -288,6 +296,7 @@ function editTask(todoListItems, i, projects) {
 
   const submit = document.createElement("input");
   submit.type = "submit";
+  submit.value = "Update"
   form.appendChild(submit);
 
   form.addEventListener("submit", function (event) {
