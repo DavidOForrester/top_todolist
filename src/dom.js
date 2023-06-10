@@ -215,7 +215,7 @@ export function buildTodoList(todoListItems, todoList, completeList, projects) {
     listItem.addEventListener("click", () => {
       editTask(todoListItems, i, projects);
     });
-
+ 
     return listItem;
   };
 

@@ -52,13 +52,32 @@ export function saveLocal(todoListItems, projects) {
 
 export function loadLocal(todoListItems, projects) {
   if (storageAvailable("localStorage")) {
+    // Load projects
     let i = 0;
-    let check
+    let check;
     do {
-      const project = localStorage.getItem(i + " Project");
-      console.log(project);
+      const localProject = localStorage.getItem(i + " Project");
+      const newProject = new project(localProject);
+      projects.push(newProject);
       i = i + 1;
-      check = localStorage.getItem(i + " Project")
+      check = localStorage.getItem(i + " Project");
+    } while (check != null);
+
+    // Load todos
+    i = 0;
+    do {
+      const title = localStorage.getItem(i + " Title");
+      const description = localStorage.getItem(i + " Description");
+      const dueDate = localStorage.getItem(i + " dueDate");
+      const priority = localStorage.getItem(i + " Priority");
+      const project = localStorage.getItem(i + " TaskProject");
+
+      const item = new todoList(title, description, dueDate, priority, project);
+
+      todoListItems.push(item);
+
+      i = i + 1;
+      check = localStorage.getItem(i + " Title");
     } while (check != null);
   }
 }
