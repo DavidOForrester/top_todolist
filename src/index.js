@@ -12,7 +12,9 @@ projects.push(allProject);
 const defaultProject = new todo.project("Default");
 projects.push(defaultProject);
 
-for (let i = 0; i < 3; i++) {
+todo.loadLocal(todoListItems, projects)
+
+/*for (let i = 0; i < 3; i++) {
   const item = new todo.todoList(
     "task " + i,
     "description of the task",
@@ -22,6 +24,6 @@ for (let i = 0; i < 3; i++) {
   );
 
   todoListItems.push(item);
-}
+}*/
 
 dom.pageLoad(todoListItems, projects);

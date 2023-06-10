@@ -46,11 +46,20 @@ export class project {
 
 export function saveLocal(todoListItems, projects) {
   if (storageAvailable("localStorage")) {
-    if (!localStorage.getItem("project")) {
-      populateStorage(todoListItems, projects);
-    }
-  } else {
-    // error handle
+    populateStorage(todoListItems, projects);
+  }
+}
+
+export function loadLocal(todoListItems, projects) {
+  if (storageAvailable("localStorage")) {
+    let i = 0;
+    let check
+    do {
+      const project = localStorage.getItem(i + " Project");
+      console.log(project);
+      i = i + 1;
+      check = localStorage.getItem(i + " Project")
+    } while (check != null);
   }
 }
 
@@ -85,8 +94,10 @@ function populateStorage(todoListItems, projects) {
   // Projects
   let i = 0;
   for (const projectItems of projects) {
-    localStorage.setItem(i + " Project", projectItems.project);
-    i = i + 1;
+    if (projectItems.project != "All" && projectItems.project != "Default") {
+      localStorage.setItem(i + " Project", projectItems.project);
+      i = i + 1;
+    }
   }
 
   // Todos
