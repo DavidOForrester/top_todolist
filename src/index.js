@@ -12,18 +12,6 @@ projects.push(allProject);
 const defaultProject = new todo.project("Default");
 projects.push(defaultProject);
 
-todo.loadLocal(todoListItems, projects)
-
-/*for (let i = 0; i < 3; i++) {
-  const item = new todo.todoList(
-    "task " + i,
-    "description of the task",
-    "01/01/2013",
-    "Low",
-    "default"
-  );
-
-  todoListItems.push(item);
-}*/
+todo.loadLocal(todoListItems, projects);
 
 dom.pageLoad(todoListItems, projects);

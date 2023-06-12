@@ -72,10 +72,15 @@ export function loadLocal(todoListItems, projects) {
       const dueDate = localStorage.getItem(i + " dueDate");
       const priority = localStorage.getItem(i + " Priority");
       const project = localStorage.getItem(i + " TaskProject");
+      const complete = localStorage.getItem(i + " Complete")
 
       const item = new todoList(title, description, dueDate, priority, project);
 
       todoListItems.push(item);
+
+      if (complete == "true") {
+        todoListItems[i].completeTask(i, todoListItems);
+      }
 
       i = i + 1;
       check = localStorage.getItem(i + " Title");

@@ -28,6 +28,7 @@ export function pageLoad(todoListItems, projects) {
 
   const project = document.createElement("select");
   project.name = "project";
+  project.id = "project-drop-down";
   header.appendChild(project);
   for (const projectItem of projects) {
     const optionProject = document.createElement("option");
@@ -35,6 +36,7 @@ export function pageLoad(todoListItems, projects) {
     optionProject.innerText = projectItem.project;
     project.appendChild(optionProject);
   }
+  
 
   const addProject = document.createElement("input");
   addProject.placeholder = "New Project";
@@ -67,6 +69,12 @@ export function pageLoad(todoListItems, projects) {
   completeItems.appendChild(completeList);
 
   buildTodoList(todoListItems, todoList, completeList, projects);
+
+  project.addEventListener("change", () => {
+    console.log("testing")
+    resetPage(todoListItems, projects);
+    buildTodoList(todoListItems, todoList, completeList, projects);
+  });
 
   // Footer element
   const footerText = document.createElement("div");
@@ -169,6 +177,8 @@ export function addTask(todoListItems, projects) {
 }
 
 export function buildTodoList(todoListItems, todoList, completeList, projects) {
+  const projectDropDown = document.getElementById("project-drop-down");
+
   const createListItem = (item, i) => {
     const listItem = document.createElement("li");
 
@@ -209,14 +219,27 @@ export function buildTodoList(todoListItems, todoList, completeList, projects) {
 
   let i = 0;
   for (const item of todoListItems) {
-    const listItem = createListItem(item, i);
+    if ((projectDropDown.value = "All")) {
+      const listItem = createListItem(item, i);
 
-    if (item.complete) {
-      completeList.appendChild(listItem);
+      if (item.complete) {
+        completeList.appendChild(listItem);
+      } else {
+        todoList.appendChild(listItem);
+      }
+      i = i + 1;
     } else {
-      todoList.appendChild(listItem);
+      if (item.project == projectDropDown.value) {
+        const listItem = createListItem(item, i);
+
+        if (item.complete) {
+          completeList.appendChild(listItem);
+        } else {
+          todoList.appendChild(listItem);
+        }
+        i = i + 1;
+      }
     }
-    i = i + 1;
   }
 }
 
@@ -336,7 +359,20 @@ function editTask(todoListItems, i, projects) {
 }
 
 function resetPage(todoListItems, projects) {
-  document.body.innerHTML = "";
+  const todoList = document.getElementById("todo-list");
+  const completeList = document.getElementById("complete-list");
 
-  pageLoad(todoListItems, projects);
+  todoList.innerHTML = "";
+  completeList.innerHTML = "";
+
+  const addModals = document.getElementById("add-task-form");
+  if (addModals != null) {
+    addModals.remove();
+  }
+  const editModals = document.getElementById("edit-task-form");
+  if (editModals != null) {
+    editModals.remove();
+  }
+
+  buildTodoList(todoListItems, todoList, completeList, projects);
 }
